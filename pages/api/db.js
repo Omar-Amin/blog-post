@@ -15,5 +15,4 @@ export default async (req, res) => {
         SELECT * FROM users
     `
     res.json(users)
-
 }
