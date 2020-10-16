@@ -1,6 +1,9 @@
+import Axios from 'axios'
 import { useState } from 'react'
 import styles from '../styles/login.module.css'
 import Input from './components/formInput.js'
+import Hash from './security/hashing.js'
+import axios from 'axios'
 
 export default function LogIn() {
 
@@ -18,8 +21,13 @@ export default function LogIn() {
     }
 
     function handleSubmit(e) {
-        console.log(username)
-        console.log(password)
+        axios.post('/api/login', {
+            username: username,
+            password: password
+        })
+            .then(res => console.log(res.data))
+            .catch(err => err)
+
         e.preventDefault()
     }
 

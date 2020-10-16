@@ -1,6 +1,24 @@
-// Next.js API route support: https://nextjs.org/docs/api-routes/introduction
+import GenerateSalt from '../security/salting.js'
+import Hash from '../security/hashing.js'
 
-export default (req, res) => {
+const sql = require('./db.js')
+
+export default async (req, res) => {
+  const salt = GenerateSalt();
+
+  const s = {
+    username: 'John',
+    email: 'Doe',
+    password: Hash('1234', salt),
+    salting: salt
+  }
+
   res.statusCode = 200
-  res.json({ name: 'John Doe' })
+  const users = await sql`
+  insert into users 
+  ${sql(s, 'username', 'email', 'password', 'salting')
+    }
+  ON CONFLICT DO NOTHING
+  `
+  res.json(users)
 }
