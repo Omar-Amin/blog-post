@@ -6,7 +6,12 @@ export default function Test() {
     const [data, setData] = useState([])
 
     useEffect(() => {
-        axios.get('/api/db')
+        axios.get('/api/db', {
+            params: {
+                username: "navn",
+                password: "12345"
+            }
+        })
             .then((res) => setData(res.data))
             .catch((err) => err)
     }, [])
