@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import styles from '../styles/Home.module.css'
+import styles from '../styles/login.module.css'
 import Input from './components/formInput.js'
 
 export default function LogIn() {
@@ -26,9 +26,12 @@ export default function LogIn() {
     return (
         <div>
             <form onSubmit={handleSubmit} className={styles.container}>
-                <Input title="Username" type="text" action={handleUsername} />
-                <Input title="Password" type="password" action={handlePassword} />
-                <input type="submit" value="Submit" />
+                <div className={styles.formBox}>
+                    <h4 className={styles.title}>Log in</h4>
+                    <Input title="Username" type="text" action={handleUsername} />
+                    <Input title="Password" type="password" action={handlePassword} />
+                    <input className={styles.submit} type="submit" value="Log in" />
+                </div>
             </form>
         </div>
     )
