@@ -29,7 +29,7 @@
   }
 
 .submit{
-    background-color: #0000FF;
+    background-color: #6969ff;
     font-size: 18px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
     font-weight: 600;
@@ -39,4 +39,10 @@
     width: 130px;
     height: 40px;
     margin-top: 15px;
+    outline: none;
+}
+
+.submit:hover{
+    background-color: #3030ff;
+    cursor: pointer;
 }
