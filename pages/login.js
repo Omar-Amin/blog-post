@@ -3,9 +3,11 @@ import styles from '../styles/login.module.css'
 import Input from './components/formInput.js'
 import axios from 'axios'
 import Link from "next/link"
-
+import { useRouter } from "next/router"
 
 export default function LogIn() {
+
+    const router = useRouter()
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -23,7 +25,11 @@ export default function LogIn() {
             username: username,
             password: password
         })
-            .then(res => console.log(res.data))
+            .then(res => {
+                if (res.data === true) {
+                    router.push("home")
+                }
+            })
             .catch(err => err)
 
         e.preventDefault()

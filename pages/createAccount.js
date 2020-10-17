@@ -5,8 +5,10 @@ import Hash from './security/hashing.js'
 import GenerateSalt from './security/salting.js'
 import axios from 'axios'
 import Link from "next/link"
+import { useRouter } from "next/router"
 
 export default function CreateAccount() {
+    const router = useRouter()
 
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -41,6 +43,8 @@ export default function CreateAccount() {
                 .then(res => {
                     if (res.data === 0) {
                         console.log("This user might already exist")
+                    } else if (res.data === 1) {
+                        router.push("home")
                     }
                 })
                 .catch(err => err)
