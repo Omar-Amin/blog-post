@@ -7,8 +7,6 @@ import axios from 'axios'
 
 export default function LogIn() {
 
-    // post som log in
-
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
