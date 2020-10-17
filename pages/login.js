@@ -1,14 +1,15 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import styles from '../styles/login.module.css'
 import Input from './components/formInput.js'
 import axios from 'axios'
 import Link from "next/link"
 import { useRouter } from "next/router"
+import { AuthContext } from './auth/authContext.js'
 
 export default function LogIn() {
-
     const router = useRouter()
 
+    const authentication = useContext(AuthContext)
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
 
@@ -27,6 +28,7 @@ export default function LogIn() {
         })
             .then(res => {
                 if (res.data === true) {
+                    authentication.setAuth(true)
                     router.push("home")
                 }
             })

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import styles from '../styles/createAccount.module.css'
 import Input from './components/formInput.js'
 import Hash from './security/hashing.js'
@@ -6,10 +6,12 @@ import GenerateSalt from './security/salting.js'
 import axios from 'axios'
 import Link from "next/link"
 import { useRouter } from "next/router"
+import { AuthContext } from './auth/authContext.js'
 
 export default function CreateAccount() {
     const router = useRouter()
 
+    const authentication = useContext(AuthContext)
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPass, setConfirmPass] = useState("")
@@ -44,6 +46,7 @@ export default function CreateAccount() {
                     if (res.data === 0) {
                         console.log("This user might already exist")
                     } else if (res.data === 1) {
+                        authentication.setAuth(true)
                         router.push("home")
                     }
                 })
