@@ -1,4 +1,3 @@
-import Axios from 'axios'
 import { useState } from 'react'
 import styles from '../styles/createAccount.module.css'
 import Input from './components/formInput.js'
@@ -30,13 +29,21 @@ export default function CreateAccount() {
     }
 
     function handleSubmit(e) {
-        axios.post('/api/createAccount', {
-            username: username,
-            password: password,
-            email: email
-        })
-            .then(res => console.log(res.data))
-            .catch(err => err)
+        if (password === confirmPass) {
+            const salt = GenerateSalt()
+            axios.post('/api/createAccount', {
+                username: username,
+                password: Hash(password, salt),
+                email: email,
+                salting: salt
+            })
+                .then(res => {
+                    if (res.data === 0) {
+                        console.log("This user might already exist")
+                    }
+                })
+                .catch(err => err)
+        }
 
         e.preventDefault()
     }
