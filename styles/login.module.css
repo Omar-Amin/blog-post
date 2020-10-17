@@ -46,3 +46,12 @@
     background-color: #3030ff;
     cursor: pointer;
 }
+
+.redirectLogin{
+  color: #444444;
+}
+
+.redirectLogin:hover{
+  cursor: pointer;
+  color: #000;
+}

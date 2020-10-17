@@ -1,9 +1,9 @@
-import Axios from 'axios'
 import { useState } from 'react'
 import styles from '../styles/login.module.css'
 import Input from './components/formInput.js'
-import Hash from './security/hashing.js'
 import axios from 'axios'
+import Link from "next/link"
+
 
 export default function LogIn() {
 
@@ -38,6 +38,9 @@ export default function LogIn() {
                     <Input title="Password" type="password" action={handlePassword} />
                     <input className={styles.submit} type="submit" value="Log in" />
                 </div>
+                <Link href="/createAccount">
+                    <h5 className={styles.redirectLogin}>Create account</h5>
+                </Link>
             </form>
         </div>
     )

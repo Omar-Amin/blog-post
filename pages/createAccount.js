@@ -4,6 +4,7 @@ import Input from './components/formInput.js'
 import Hash from './security/hashing.js'
 import GenerateSalt from './security/salting.js'
 import axios from 'axios'
+import Link from "next/link"
 
 export default function CreateAccount() {
 
@@ -59,6 +60,9 @@ export default function CreateAccount() {
                     <Input title="Email" type="text" action={handleEmail} />
                     <input className={styles.submit} type="submit" value="Create account" />
                 </div>
+                <Link href="/login">
+                    <h5 className={styles.redirectLogin}>I already have an account.</h5>
+                </Link>
             </form>
         </div>
     )
