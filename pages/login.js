@@ -27,8 +27,9 @@ export default function LogIn() {
             password: password
         })
             .then(res => {
-                if (res.data === true) {
+                if (res.data) {
                     authentication.setAuth(true)
+                    authentication.setUser(res.data)
                     router.push("home")
                 }
             })

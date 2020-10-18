@@ -19,5 +19,5 @@ export default async (req, res) => {
     ON CONFLICT DO NOTHING
     `
 
-    res.json(count)
+    res.json({ type: count, name: username })
 }

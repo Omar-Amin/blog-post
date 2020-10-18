@@ -43,10 +43,11 @@ export default function CreateAccount() {
                 salting: salt
             })
                 .then(res => {
-                    if (res.data === 0) {
+                    if (res.data.type === 0) {
                         console.log("This user might already exist")
-                    } else if (res.data === 1) {
+                    } else if (res.data.type === 1) {
                         authentication.setAuth(true)
+                        authentication.setUser(res.data.name)
                         router.push("home")
                     }
                 })

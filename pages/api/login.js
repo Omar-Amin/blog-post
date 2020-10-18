@@ -18,6 +18,10 @@ export default async (req, res) => {
         }
     }
 
-    res.json(isCorrect)
+    if (isCorrect) {
+        res.json(username)
+    } else {
+        res.json(false)
+    }
 
 }
