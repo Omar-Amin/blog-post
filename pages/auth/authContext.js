@@ -14,11 +14,13 @@ const AuthPovider = ({ children }) => {
         userTmp = token.user
     }
 
+    console.log(token)
+
     const [auth, setAuth] = useState(authTmp)
     const [user, setUser] = useState(userTmp)
 
     return (
-        <AuthContext.Provider value={{ auth, user, setUser, setAuth }}>
+        <AuthContext.Provider value={{ auth, user, setUser, setAuth, setCookie }}>
             {children}
         </AuthContext.Provider>
     )

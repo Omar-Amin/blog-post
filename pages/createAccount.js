@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState, useContext, useEffect } from 'react'
 import styles from '../styles/createAccount.module.css'
 import Input from './components/formInput.js'
 import Hash from './security/hashing.js'

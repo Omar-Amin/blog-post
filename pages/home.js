@@ -3,9 +3,8 @@ import Link from "next/link"
 import { AuthContext } from './auth/authContext.js'
 import { useContext, useEffect } from 'react'
 import { useRouter } from "next/router"
-import { useCookies } from 'react-cookie'
 
-const HomePage = (logOut) => {
+const HomePage = ({ logOut }) => {
     return (
         <Link href="/">
             <button type="button" onClick={logOut}>Log out</button>
@@ -15,17 +14,12 @@ const HomePage = (logOut) => {
 
 export default function Home() {
     const router = useRouter();
-    const [cookies, setCookie] = useCookies(['name']);
-    console.log(cookies.token)
     const auth = useContext(AuthContext)
 
-    console.log(auth)
-
     function logOut() {
+        auth.setCookie('token', { auth: false, user: null }, { path: '/' })
         auth.setAuth(false)
         auth.setUser(null)
-        localStorage.setItem('auth', false)
-        localStorage.setItem('token', null)
     }
 
     useEffect(() => {

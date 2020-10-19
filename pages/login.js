@@ -5,11 +5,9 @@ import axios from 'axios'
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { AuthContext } from './auth/authContext.js'
-import { useCookies } from 'react-cookie'
 
 export default function LogIn() {
     const router = useRouter()
-    const [cookies, setCookie] = useCookies(['token'])
     const authentication = useContext(AuthContext)
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
@@ -38,7 +36,7 @@ export default function LogIn() {
                 if (resData) {
                     authentication.setAuth(true)
                     authentication.setUser(resData)
-                    setCookie('token', { auth: true, user: resData }, { path: '/' })
+                    authentication.setCookie('token', { auth: true, user: resData }, { path: '/' })
                     router.push("home")
                 }
             })
