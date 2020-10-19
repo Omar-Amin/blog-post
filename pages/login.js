@@ -1,17 +1,24 @@
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import styles from '../styles/login.module.css'
 import Input from './components/formInput.js'
 import axios from 'axios'
 import Link from "next/link"
 import { useRouter } from "next/router"
 import { AuthContext } from './auth/authContext.js'
+import { useCookies } from 'react-cookie'
 
 export default function LogIn() {
     const router = useRouter()
-
+    const [cookies, setCookie] = useCookies(['token'])
     const authentication = useContext(AuthContext)
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
+
+    useEffect(() => {
+        if (authentication.auth && authentication.user !== null) {
+            router.push('/home')
+        }
+    }, [])
 
     function handleUsername(e) {
         setUsername(e.target.value)
@@ -27,9 +34,11 @@ export default function LogIn() {
             password: password
         })
             .then(res => {
-                if (res.data) {
+                const resData = res.data
+                if (resData) {
                     authentication.setAuth(true)
-                    authentication.setUser(res.data)
+                    authentication.setUser(resData)
+                    setCookie('token', { auth: true, user: resData }, { path: '/' })
                     router.push("home")
                 }
             })

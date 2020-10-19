@@ -1,10 +1,21 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { useCookies } from 'react-cookie'
 
 const AuthContext = createContext({})
 
 const AuthPovider = ({ children }) => {
-    const [auth, setAuth] = useState(false)
-    const [user, setUser] = useState(null)
+    const [cookies, setCookie] = useCookies(['token']);
+    const token = cookies.token
+    var authTmp = false
+    var userTmp = null
+
+    if (token) {
+        authTmp = token.auth
+        userTmp = token.user
+    }
+
+    const [auth, setAuth] = useState(authTmp)
+    const [user, setUser] = useState(userTmp)
 
     return (
         <AuthContext.Provider value={{ auth, user, setUser, setAuth }}>

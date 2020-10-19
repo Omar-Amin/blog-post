@@ -10,12 +10,17 @@ import { AuthContext } from './auth/authContext.js'
 
 export default function CreateAccount() {
     const router = useRouter()
-
     const authentication = useContext(AuthContext)
     const [username, setUsername] = useState("")
     const [password, setPassword] = useState("")
     const [confirmPass, setConfirmPass] = useState("")
     const [email, setEmail] = useState("")
+
+    useEffect(() => {
+        if (authentication.auth && authentication.user !== null) {
+            router.push('/home')
+        }
+    }, [])
 
     function handleUsername(e) {
         setUsername(e.target.value)
