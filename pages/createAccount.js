@@ -52,6 +52,7 @@ export default function CreateAccount() {
                         console.log("This user might already exist")
                     } else if (res.data.type === 1) {
                         authentication.setAuth(true)
+                        // TODO: somehow find uid after creating account
                         authentication.setUser(res.data.name)
                         router.push("home")
                     }

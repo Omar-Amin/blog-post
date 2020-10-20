@@ -61,6 +61,7 @@
     margin-top: 15px;
     outline: none;
     margin-bottom: 10px;
+    max-lines: 100;
 }
 
 .submit:hover{

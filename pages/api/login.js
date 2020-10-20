@@ -15,13 +15,11 @@ export default async (req, res) => {
         const user = users[0]
         if (Hash(password, user.salting) === user.password) {
             isCorrect = true;
+            res.json({ username, id: user.uid })
         }
     }
 
-    if (isCorrect) {
-        res.json(username)
-    } else {
+    if (!isCorrect) {
         res.json(false)
     }
-
 }
