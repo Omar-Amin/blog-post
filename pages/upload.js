@@ -1,24 +1,23 @@
-import styles from '../styles/Home.module.css'
+import styles from '../styles/upload.module.css'
 import { AuthContext } from './auth/authContext.js'
 import { useContext, useEffect } from 'react'
 import { useRouter } from "next/router"
+import UploadLayout from './components/uploadLayout.js'
 
-export default function Home() {
+export default function Upload() {
     const router = useRouter();
 
     const auth = useContext(AuthContext)
 
-    console.log(auth)
-
     useEffect(() => {
-        if (!auth.auth) {
-            router.replace('/')
+        if (!auth.auth || !auth.user) {
+            router.push('/')
         }
     }, [])
 
     return (
         <div className={styles.container}>
-            {auth.auth ? <div>upload</div> : null}
+            {auth.auth ? <UploadLayout /> : null}
         </div>
     )
 }
