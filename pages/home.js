@@ -9,7 +9,7 @@ import axios from 'axios'
 const HomePage = ({ logOut, data }) => {
     return (
         <div className={styles.container}>
-            {data.map(data => <Post title={data.title} desc={data.body} />)}
+            {data.map(data => <Post title={data.title} desc={data.body} author={data.author} />)}
             <Link href="/">
                 <button type="button" onClick={logOut}>Log out</button>
             </Link>
@@ -40,7 +40,7 @@ export default function Home() {
     }, [])
 
     return (
-        <div className={styles.container}>
+        <div>
             {auth.auth ? <HomePage data={data} logOut={logOut} /> : null}
         </div>
     )
