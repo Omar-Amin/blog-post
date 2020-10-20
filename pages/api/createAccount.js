@@ -12,12 +12,13 @@ export default async (req, res) => {
         salting: salting
     }
 
-    const { count } = await sql`
+    const users = await sql`
     insert into users 
     ${sql(data, 'username', 'email', 'password', 'salting')
         }
     ON CONFLICT DO NOTHING
+    RETURNING *
     `
 
-    res.json({ type: count, name: username })
+    res.json(users)
 }

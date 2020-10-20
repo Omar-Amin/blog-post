@@ -48,12 +48,13 @@ export default function CreateAccount() {
                 salting: salt
             })
                 .then(res => {
-                    if (res.data.type === 0) {
+                    const arr = res.data
+                    if (arr.length < 1) {
                         console.log("This user might already exist")
-                    } else if (res.data.type === 1) {
+                    } else if (arr.length > 0) {
                         authentication.setAuth(true)
                         // TODO: somehow find uid after creating account
-                        authentication.setUser(res.data.name)
+                        authentication.setUser({ username: arr[0].username, id: arr[0].uid })
                         router.push("home")
                     }
                 })
