@@ -6,7 +6,7 @@ import { useRouter } from "next/router"
 import Post from './components/post.js'
 import axios from 'axios'
 
-const HomePage = ({ logOut, data }) => {
+const ProfilePage = ({ logOut, data }) => {
     return (
         <div className={styles.container}>
             {data.map(data => <Post title={data.title} desc={data.body} author={data.author} />)}
@@ -17,7 +17,7 @@ const HomePage = ({ logOut, data }) => {
     )
 }
 
-export default function Home() {
+export default function Profile() {
     const router = useRouter();
     const auth = useContext(AuthContext)
     const [data, setData] = useState([])
@@ -30,7 +30,11 @@ export default function Home() {
 
     useEffect(() => {
         if (auth.auth) {
-            axios.get('/api/getPosts')
+            axios.get('/api/getUserPosts', {
+                params: {
+                    user_id: auth.user.id
+                }
+            })
                 .then(res => setData(res.data))
                 .catch()
         } else {
@@ -40,7 +44,7 @@ export default function Home() {
 
     return (
         <div>
-            {auth.auth ? <HomePage data={data} logOut={logOut} /> : null}
+            {auth.auth ? <ProfilePage data={data} logOut={logOut} /> : null}
         </div>
     )
 }
