@@ -10,7 +10,7 @@ import Header from './components/header.js'
 const ProfilePage = ({ data }) => {
     return (
         <div className={styles.container}>
-            {data.map(data => <Post title={data.title} desc={data.body} author={data.author} />)}
+            {data.map(data => <Post title={data.title} desc={data.body} author={data.author} date={data.date_created} />)}
         </div>
     )
 }

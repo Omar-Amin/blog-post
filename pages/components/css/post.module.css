@@ -40,6 +40,16 @@
     color: #444444;
     font-weight: bold;
     margin-left: 10px;
+    display: inline-block;
+
+}
+
+.date{
+    color: #444444;
+    font-weight: bold;
+    margin-left: 80%;
+    display: inline-block;
+
 }
 
 .desc::-webkit-scrollbar {
