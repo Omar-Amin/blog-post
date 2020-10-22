@@ -5,14 +5,12 @@ import { useContext, useEffect, useState } from 'react'
 import { useRouter } from "next/router"
 import Post from './components/post.js'
 import axios from 'axios'
+import Header from './components/header.js'
 
-const ProfilePage = ({ logOut, data }) => {
+const ProfilePage = ({ data }) => {
     return (
         <div className={styles.container}>
             {data.map(data => <Post title={data.title} desc={data.body} author={data.author} />)}
-            <Link href="/">
-                <button type="button" onClick={logOut}>Log out</button>
-            </Link>
         </div>
     )
 }
@@ -21,12 +19,6 @@ export default function Profile() {
     const router = useRouter();
     const auth = useContext(AuthContext)
     const [data, setData] = useState([])
-
-    function logOut() {
-        auth.setCookie('token', { auth: false, user: null }, { path: '/' })
-        auth.setAuth(false)
-        auth.setUser(null)
-    }
 
     useEffect(() => {
         if (auth.auth) {
@@ -44,7 +36,8 @@ export default function Profile() {
 
     return (
         <div>
-            {auth.auth ? <ProfilePage data={data} logOut={logOut} /> : null}
+            <Header />
+            {auth.auth ? <ProfilePage data={data} /> : null}
         </div>
     )
 }

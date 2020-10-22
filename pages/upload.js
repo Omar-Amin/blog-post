@@ -4,6 +4,7 @@ import { useContext, useEffect, useState } from 'react'
 import { useRouter } from "next/router"
 import UploadLayout from './components/uploadLayout.js'
 import axios from 'axios'
+import Header from './components/header.js'
 
 export default function Upload() {
     const router = useRouter();
@@ -45,6 +46,7 @@ export default function Upload() {
 
     return (
         <div className={styles.container}>
+            <Header />
             {auth.auth ? <UploadLayout handleTitle={handleTitle} handleDesc={handleDesc} submit={submit} /> : null}
         </div>
     )
